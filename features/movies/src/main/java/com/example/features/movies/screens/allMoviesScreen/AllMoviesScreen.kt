@@ -28,8 +28,6 @@ fun AllMoviesScreen(
                 is MoviesSideEffect.Navigation.NavigateToMovieDetails -> {
                     onNavigationRequested(it)
                 }
-
-                is MoviesSideEffect.ShowError -> TODO()
             }
         }
     }

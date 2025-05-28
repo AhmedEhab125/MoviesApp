@@ -87,7 +87,6 @@ class AllMoviesViewModel(
             }
         } catch (e: Exception) {
             setState { MoviesState.Error(e.message ?: "Search failed") }
-            setEffect { MoviesSideEffect.ShowError(e.message ?: "Search failed") }
         }
     }
 

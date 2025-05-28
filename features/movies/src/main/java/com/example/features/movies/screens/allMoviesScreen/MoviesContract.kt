@@ -36,7 +36,6 @@ sealed interface MoviesEvent : ViewEvent {
 }
 
 sealed interface MoviesSideEffect : ViewSideEffect {
-    data class ShowError(val message: String) : MoviesSideEffect
     sealed class Navigation : MoviesSideEffect {
         data class NavigateToMovieDetails(val movieId: Int) : Navigation()
     }
