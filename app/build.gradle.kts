@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace = "com.example.trianglezmoviesapp"
-    compileSdk = 35
+    compileSdk = VersionManger.COMPILE_SDK
 
     defaultConfig {
         applicationId = "com.example.trianglezmoviesapp"
-        minSdk = 24
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = VersionManger.MIN_SDK
+        targetSdk = VersionManger.TARGET_SDK
+        versionCode = VersionManger.VERSION_CODE
+        versionName = VersionManger.VERSION_NAME
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,7 +40,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -56,4 +55,17 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Project modules
+    implementation(project(Modules.CORE_BASE))
+    implementation(project(Modules.CORE_NETWORK))
+    implementation(project(Modules.CORE_UI))
+    implementation(project(Modules.DOMAIN_MODELS))
+    implementation(project(Modules.DOMAIN_USE_CASE))
+    implementation(project(Modules.DATA_REPOSITORIES))
+    implementation(project(Modules.DATA_SERVICES))
+    implementation(project(Modules.FEATURES_MOVIES))
+
+    // Koin for DI
+    implementation(libs.bundles.koin)
 }

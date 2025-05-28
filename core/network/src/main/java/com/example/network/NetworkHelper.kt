@@ -32,7 +32,7 @@ class NetworkHelper {
 
             in HttpStatusCode.BadRequest.value..HttpStatusCode.InternalServerError.value -> {
                 val errorBody = try {
-                    response.body<BaseApiResponse<T>>()
+                    response.body<BaseErrorResponse>()
                 } catch (throwable: Throwable) {
                     throw ParsingException("Error Body Parsing Error: ${throwable.message}")
                 }
