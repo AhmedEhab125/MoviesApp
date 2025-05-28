@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Error messages -->
+    <string name="error_failed_to_load_movies">Failed to load movies</string>
+    <string name="error_failed_to_load_more_movies">Failed to load more movies</string>
+    <string name="error_failed_to_search_movies">Failed to search movies</string>
+    <string name="error_network_error">Network error occurred</string>
+    <string name="error_unknown">Unknown error occurred</string>
+    <string name="error_something_went_wrong">Oops! Something went wrong</string>
+    <string name="error_network_connection">Failed to load movies. Please check your internet connection.</string>
+    <string name="error_network_timeout">Network timeout occurred.</string>
+    <string name="error_search_failed">Search failed</string>
+
+    <!-- Loading messages -->
+    <string name="loading_movies">Loading movies…</string>
+    <string name="loading_popular_movies">Loading popular movies…</string>
+    <string name="loading_searching_movies">Searching movies…</string>
+
+    <!-- Empty state messages -->
+    <string name="empty_no_movies_found">No movies found</string>
+    <string name="empty_no_search_results">No movies found</string>
+    <string name="empty_try_different_keywords">Try searching with different keywords</string>
+    <string name="empty_try_refreshing">Try refreshing or check your connection</string>
+
+    <!-- Button texts -->
+    <string name="button_retry">Try Again</string>
+    <string name="button_refresh">Refresh</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Search movies…</string>
+    <string name="search_results_title">Search Results</string>
+    <string name="popular_movies_title">Popular Movies</string>
+    <string name="search_placeholder_alt">Search for movies…</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_toggle_view_mode">Toggle view mode</string>
+    <string name="cd_search">Search</string>
+    <string name="cd_clear">Clear</string>
+    <string name="cd_retry">Retry</string>
+    <string name="cd_rating">Rating</string>
+    <string name="cd_error">Error</string>
+    <string name="cd_movie_poster">Movie poster</string>
+    <string name="cd_movie_backdrop">Movie backdrop</string>
+    <string name="cd_no_poster">No poster available</string>
+    <string name="cd_no_backdrop">No backdrop available</string>
+
+    <!-- Movie details -->
+    <string name="movie_rating_format">%.1f</string>
+    <string name="movie_emoji">🎬</string>
+
+    <!-- Preview/Sample data -->
+    <string name="sample_movie_title">The Avengers</string>
+    <string name="sample_movie_overview">Earth\'s mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.</string>
+    <string name="sample_movie_overview_short">Earth\'s mightiest heroes must come together and learn to fight as a team.</string>
+    <string name="sample_movie_date">2012-04-25</string>
+    <string name="sample_movie_title_2">Spider-Man: No Way Home</string>
+    <string name="sample_movie_overview_2">Peter Parker\'s secret identity is revealed to the entire world.</string>
+    <string name="sample_movie_date_2">2021-12-15</string>
+    <string name="sample_search_query">Avengers</string>
+
+    <!-- Common values -->
+    <string name="empty_string" translatable="false"></string>
+</resources> 

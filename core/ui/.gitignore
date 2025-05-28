@@ -1,0 +1,21 @@
+# Build outputs
+/build
+/release
+/debug
+
+# Generated files
+/generated
+/src/main/res/values/generated_*
+
+# Test outputs
+/androidTest-results
+/test-results
+
+# Lint outputs
+/lint-results*
+
+# Coverage reports
+/coverage
+
+# Temporary files
+*.tmp
