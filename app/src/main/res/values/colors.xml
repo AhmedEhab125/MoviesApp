@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Movie Details Colors -->
+    <color name="rating_star_gold">#FFFFD700</color>
+    <color name="quality_excellent">#FF4CAF50</color>
+    <color name="quality_very_good">#FF8BC34A</color>
+    <color name="quality_good">#FFFFEB3B</color>
+    <color name="quality_average">#FFFF9800</color>
+    <color name="quality_below_average">#FFF44336</color>
 </resources>

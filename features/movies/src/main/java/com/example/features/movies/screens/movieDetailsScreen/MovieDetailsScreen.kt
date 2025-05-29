@@ -48,9 +48,11 @@ import com.example.ui.R
 import com.example.ui.components.images.NetworkImage
 import com.example.ui.components.loading.LoadingScreen
 import com.example.ui.components.states.ErrorScreen
+import com.example.ui.constants.UiColors
 import com.example.ui.constants.UiConstants
 import com.example.ui.dimentions.Dimensions
 import com.example.ui.model.MovieUiModel
+import com.example.ui.utils.MovieUtils
 import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -136,8 +138,8 @@ private fun MovieDetailsHeader(
     ) {
         // Backdrop image
         NetworkImage(
-            imageUrl = "${UiConstants.TMDB_IMAGE_BASE_URL_W780}${movie.posterUrl}",
-            contentDescription = movie.title,
+            imageUrl = MovieUtils.getFullPosterUrl(movie.posterUrl),
+            contentDescription = MovieUtils.getSafeMovieTitle(movie),
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
@@ -150,11 +152,11 @@ private fun MovieDetailsHeader(
                     Brush.verticalGradient(
                         colors = listOf(
                             Color.Transparent,
-                            Color.Black.copy(alpha = 0.1f),
-                            Color.Black.copy(alpha = 0.4f),
-                            Color.Black.copy(alpha = 0.8f)
+                            Color.Black.copy(alpha = UiConstants.SURFACE_ALPHA_MINIMAL),
+                            Color.Black.copy(alpha = UiConstants.SURFACE_ALPHA_LOW),
+                            Color.Black.copy(alpha = UiConstants.SURFACE_ALPHA_MEDIUM)
                         ),
-                        startY = 0.2f
+                        startY = UiConstants.GRADIENT_START_Y
                     )
                 )
         )
@@ -168,13 +170,13 @@ private fun MovieDetailsHeader(
                     modifier = Modifier
                         .padding(Dimensions.dp_8dp)
                         .background(
-                            MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
+                            MaterialTheme.colorScheme.surface.copy(alpha = UiConstants.SURFACE_ALPHA_HIGH),
                             RoundedCornerShape(Dimensions.dp_50dp)
                         )
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back",
+                        contentDescription = stringResource(R.string.cd_back_button),
                         tint = MaterialTheme.colorScheme.onSurface
                     )
                 }
@@ -202,7 +204,7 @@ private fun MovieHeaderInfo(
     ) {
         // Title
         Text(
-            text = movie.title,
+            text = MovieUtils.getSafeMovieTitle(movie),
             style = MaterialTheme.typography.headlineMedium,
             color = Color.White,
             fontWeight = FontWeight.Bold
@@ -217,13 +219,16 @@ private fun MovieHeaderInfo(
         ) {
             // Rating
             movie.rating?.let { rating ->
-                MovieInfoChip(
-                    icon = Icons.Default.Star,
-                    text = String.format("%.1f", rating),
-                    containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.95f),
-                    contentColor = MaterialTheme.colorScheme.onPrimary,
-                    iconTint = Color(0xFFFFD700)
-                )
+                if (MovieUtils.isValidRating(rating)) {
+                    MovieInfoChip(
+                        icon = Icons.Default.Star,
+                        text = MovieUtils.formatRating(rating),
+                        containerColor = MaterialTheme.colorScheme.primary.copy(alpha = UiConstants.SURFACE_ALPHA_HIGH),
+                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                        iconTint = UiColors.RatingStarGold,
+                        contentDescription = stringResource(R.string.cd_movie_rating_chip)
+                    )
+                }
             }
 
             // Release date
@@ -231,8 +236,9 @@ private fun MovieHeaderInfo(
                 MovieInfoChip(
                     icon = Icons.Default.DateRange,
                     text = releaseDate,
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.95f),
-                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = UiConstants.SURFACE_ALPHA_HIGH),
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    contentDescription = stringResource(R.string.cd_movie_release_date_chip)
                 )
             }
         }
@@ -246,6 +252,7 @@ private fun MovieInfoChip(
     containerColor: Color,
     contentColor: Color,
     iconTint: Color = contentColor,
+    contentDescription: String? = null,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -263,7 +270,7 @@ private fun MovieInfoChip(
         ) {
             Icon(
                 imageVector = icon,
-                contentDescription = null,
+                contentDescription = contentDescription,
                 tint = iconTint,
                 modifier = Modifier.size(Dimensions.dp_16dp)
             )
@@ -318,7 +325,7 @@ private fun MovieQuickStatsCard(
             modifier = Modifier.padding(Dimensions.dp_20dp)
         ) {
             Text(
-                text = "Movie Information",
+                text = stringResource(R.string.movie_details_information),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
@@ -331,18 +338,20 @@ private fun MovieQuickStatsCard(
                 verticalArrangement = Arrangement.spacedBy(Dimensions.dp_12dp)
             ) {
                 movie.rating?.let { rating ->
-                    MovieStatItem(
-                        icon = Icons.Default.Star,
-                        label = "Rating",
-                        value = "${String.format("%.1f", rating)}/10",
-                        iconTint = Color(0xFFFFD700)
-                    )
+                    if (MovieUtils.isValidRating(rating)) {
+                        MovieStatItem(
+                            icon = Icons.Default.Star,
+                            label = stringResource(R.string.movie_details_rating),
+                            value = stringResource(R.string.movie_details_rating_format, rating),
+                            iconTint = UiColors.RatingStarGold
+                        )
+                    }
                 }
 
                 movie.releaseDate?.let { releaseDate ->
                     MovieStatItem(
                         icon = Icons.Default.DateRange,
-                        label = "Release Date",
+                        label = stringResource(R.string.movie_details_release_date),
                         value = releaseDate,
                         iconTint = MaterialTheme.colorScheme.primary
                     )
@@ -350,29 +359,47 @@ private fun MovieQuickStatsCard(
 
                 // Movie quality indicator
                 movie.rating?.let { rating ->
-                    val quality = when {
-                        rating >= 8.0 -> "Excellent"
-                        rating >= 7.0 -> "Very Good"
-                        rating >= 6.0 -> "Good"
-                        rating >= 5.0 -> "Average"
-                        else -> "Below Average"
-                    }
+                    if (MovieUtils.isValidRating(rating)) {
+                        val (qualityText, qualityColor) = getMovieQuality(rating)
 
-                    MovieStatItem(
-                        icon = Icons.Default.ThumbUp,
-                        label = "Quality",
-                        value = quality,
-                        iconTint = when {
-                            rating >= 8.0 -> Color(0xFF4CAF50)
-                            rating >= 7.0 -> Color(0xFF8BC34A)
-                            rating >= 6.0 -> Color(0xFFFFEB3B)
-                            rating >= 5.0 -> Color(0xFFFF9800)
-                            else -> Color(0xFFF44336)
-                        }
-                    )
+                        MovieStatItem(
+                            icon = Icons.Default.ThumbUp,
+                            label = stringResource(R.string.movie_details_quality),
+                            value = stringResource(qualityText),
+                            iconTint = qualityColor,
+                            contentDescription = stringResource(R.string.cd_movie_quality_indicator)
+                        )
+                    }
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun getMovieQuality(rating: Double): Pair<Int, Color> {
+    return when {
+        rating >= UiConstants.RATING_EXCELLENT_THRESHOLD -> Pair(
+            R.string.movie_quality_excellent,
+            UiColors.QualityExcellent
+        )
+
+        rating >= UiConstants.RATING_VERY_GOOD_THRESHOLD -> Pair(
+            R.string.movie_quality_very_good,
+            UiColors.QualityVeryGood
+        )
+
+        rating >= UiConstants.RATING_GOOD_THRESHOLD -> Pair(
+            R.string.movie_quality_good,
+            UiColors.QualityGood
+        )
+
+        rating >= UiConstants.RATING_AVERAGE_THRESHOLD -> Pair(
+            R.string.movie_quality_average,
+            UiColors.QualityAverage
+        )
+
+        else -> Pair(R.string.movie_quality_below_average, UiColors.QualityBelowAverage)
     }
 }
 
@@ -382,6 +409,7 @@ private fun MovieStatItem(
     label: String,
     value: String,
     iconTint: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    contentDescription: String? = null,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -395,7 +423,7 @@ private fun MovieStatItem(
         ) {
             Icon(
                 imageVector = icon,
-                contentDescription = null,
+                contentDescription = contentDescription,
                 tint = iconTint,
                 modifier = Modifier.size(Dimensions.dp_20dp)
             )
@@ -432,7 +460,7 @@ private fun MovieOverviewCard(
             modifier = Modifier.padding(Dimensions.dp_20dp)
         ) {
             Text(
-                text = "Synopsis",
+                text = stringResource(R.string.movie_details_synopsis),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
@@ -445,7 +473,7 @@ private fun MovieOverviewCard(
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Justify,
-                lineHeight = MaterialTheme.typography.bodyLarge.lineHeight.times(1.2f)
+                lineHeight = MaterialTheme.typography.bodyLarge.lineHeight.times(UiConstants.TEXT_LINE_HEIGHT_MULTIPLIER)
             )
         }
     }
