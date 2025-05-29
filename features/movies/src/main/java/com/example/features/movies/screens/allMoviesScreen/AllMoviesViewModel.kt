@@ -70,7 +70,7 @@ class AllMoviesViewModel(
         searchJob?.cancel()
         if (query.isNotEmpty()) {
             searchJob = viewModelScope.launch {
-                delay(500)
+                delay(DELAY_TIME)
                 searchMovies(query)
             }
         } else {
@@ -120,5 +120,9 @@ class AllMoviesViewModel(
                 )
             }
         }
+    }
+
+    companion object {
+        private const val DELAY_TIME = 500L
     }
 }

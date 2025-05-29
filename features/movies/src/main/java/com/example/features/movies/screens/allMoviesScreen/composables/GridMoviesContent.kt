@@ -23,7 +23,7 @@ fun GridMoviesContent(
     onMovieClick: (MovieUiModel) -> Unit,
 ) {
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(NUMBER_OF_COLUMNS),
         verticalArrangement = Arrangement.spacedBy(Dimensions.dp_16dp),
         horizontalArrangement = Arrangement.spacedBy(Dimensions.dp_16dp)
     ) {
@@ -61,3 +61,5 @@ fun GridMoviesContent(
         }
     }
 }
+
+private const val NUMBER_OF_COLUMNS = 2
