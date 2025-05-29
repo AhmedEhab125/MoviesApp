@@ -9,11 +9,13 @@ import com.example.cashing.toDomainModel
 import com.example.models.Movie
 import com.example.repositories_interfaces.IMoviesRepository
 import com.example.services.ApiConstants
+import com.example.services.mappers.toDomainModel
 import com.example.services.moviesService.cashingService.IMoviesCacheService
 import com.example.services.moviesService.networkService.IMoviesApiService
 import com.example.services.paging.MoviesRemoteMediator
 import com.example.services.paging.SearchMoviesPagingSource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
 
@@ -50,4 +52,10 @@ class MoviesRepositoryImpl(
             pagingSourceFactory = { SearchMoviesPagingSource(moviesService, query) }
         ).flow
     }
+
+    override fun getMovieDetails(movieId: Int): Flow<Movie?> = flow {
+        emit(moviesService.getMovieDetails(movieId)?.toDomainModel())
+    }
+
+
 } 

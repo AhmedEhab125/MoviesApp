@@ -5,9 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.example.features.movies.screens.allMoviesScreen.AllMoviesRoute
+import androidx.navigation.compose.rememberNavController
+import com.example.trianglezmoviesapp.navigation.MoviesNavGraph
 import com.example.trianglezmoviesapp.ui.theme.TriangleZMoviesAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,8 +18,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TriangleZMoviesAppTheme {
+                val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AllMoviesRoute(navigateToMovieDetails = {})
+                    MoviesNavGraph(
+                        modifier = Modifier.padding(innerPadding),
+                        navController = navController
+                    )
                 }
             }
         }

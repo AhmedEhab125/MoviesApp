@@ -19,7 +19,6 @@ fun MovieResponse.toDomainModel(): Movie {
         adult = adult,
         originalLanguage = originalLanguage,
         originalTitle = originalTitle,
-        genreIds = genreIds
     )
 }
 

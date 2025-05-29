@@ -14,6 +14,7 @@
     <!-- Loading messages -->
     <string name="loading_movies">Loading movies…</string>
     <string name="loading_popular_movies">Loading popular movies…</string>
+    <string name="loading_movie_details">Loading movie details…</string>
     <string name="loading_searching_movies">Searching movies…</string>
 
     <!-- Empty state messages -->
