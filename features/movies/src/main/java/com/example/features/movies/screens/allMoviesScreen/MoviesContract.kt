@@ -4,15 +4,15 @@ import androidx.paging.PagingData
 import com.example.base.ViewEvent
 import com.example.base.ViewSideEffect
 import com.example.base.ViewState
-import com.example.models.Movie
+import com.example.ui.model.MovieUiModel
 import kotlinx.coroutines.flow.Flow
 
 sealed interface MoviesState : ViewState {
     object Idle : MoviesState
     object Loading : MoviesState
     data class DataLoaded(
-        val moviesPagingData: Flow<PagingData<Movie>>? = null,
-        val searchPagingData: Flow<PagingData<Movie>>? = null,
+        val moviesPagingData: Flow<PagingData<MovieUiModel>>? = null,
+        val searchPagingData: Flow<PagingData<MovieUiModel>>? = null,
         val searchQuery: String = "",
         val isSearching: Boolean = false,
         val viewMode: ViewMode = ViewMode.LIST
