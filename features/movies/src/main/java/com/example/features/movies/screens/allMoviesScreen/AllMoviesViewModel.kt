@@ -35,7 +35,6 @@ class AllMoviesViewModel(
     }
 
     private fun loadPopularMovies() {
-        setState { MoviesState.Loading }
         val moviesPagingData =
             getPopularMoviesPagingUseCase()
                 .cachedIn(viewModelScope)
@@ -84,7 +83,6 @@ class AllMoviesViewModel(
             clearSearch()
             return
         }
-        setState { MoviesState.Loading }
         val searchPagingData = searchMoviesPagingUseCase(query).cachedIn(viewModelScope).map {
             it.map { movie ->
                 movie.toUiModel()
