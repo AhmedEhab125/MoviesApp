@@ -8,4 +8,5 @@ object ApiConstants {
     // Paging
     const val DEFAULT_PAGE_SIZE = 20
     const val INITIAL_LOAD_SIZE = 20
+    const val PREFETCH_DISTANCE = 3
 } 
