@@ -1,4 +1,4 @@
-package com.example.services.moviesService
+package com.example.services.moviesService.networkService
 
 import com.example.network.NetworkHelper
 import com.example.services.ApiConstants
@@ -8,7 +8,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
-class MoviesService(
+internal class MoviesService(
     private val httpClient: HttpClient,
     private val networkHelper: NetworkHelper
 ) : IMoviesApiService {

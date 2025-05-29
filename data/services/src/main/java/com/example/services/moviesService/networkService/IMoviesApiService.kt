@@ -1,4 +1,4 @@
-package com.example.services.moviesService
+package com.example.services.moviesService.networkService
 
 import com.example.services.models.MoviesResponse
 

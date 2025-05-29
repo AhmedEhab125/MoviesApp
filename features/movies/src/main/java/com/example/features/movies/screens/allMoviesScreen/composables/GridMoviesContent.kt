@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.itemKey
 import com.example.ui.R
 import com.example.ui.components.cards.MovieGridCard
 import com.example.ui.components.loading.LoadingItem
@@ -29,7 +28,6 @@ fun GridMoviesContent(
     ) {
         items(
             count = lazyPagingItems.itemCount,
-            key = lazyPagingItems.itemKey { it.id }
         ) { index ->
             val movie = lazyPagingItems[index]
             if (movie != null) {

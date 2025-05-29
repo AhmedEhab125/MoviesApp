@@ -60,6 +60,7 @@ dependencies {
     implementation(project(Modules.CORE_BASE))
     implementation(project(Modules.CORE_NETWORK))
     implementation(project(Modules.CORE_UI))
+    implementation(project(Modules.CORE_CASHING))
     implementation(project(Modules.DOMAIN_MODELS))
     implementation(project(Modules.DOMAIN_USE_CASE))
     implementation(project(Modules.DATA_REPOSITORIES))
@@ -68,4 +69,5 @@ dependencies {
 
     // Koin for DI
     implementation(libs.bundles.koin)
+
 }

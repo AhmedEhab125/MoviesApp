@@ -44,6 +44,7 @@ dependencies {
     // Project dependencies
     implementation(project(Modules.CORE_NETWORK))
     implementation(project(Modules.DOMAIN_MODELS))
+    implementation(project(Modules.CORE_CASHING))
 
     // Serialization
     implementation(libs.kotlinx.serialization.json.v173)
@@ -56,4 +57,7 @@ dependencies {
 
     // Koin for DI
     implementation(libs.bundles.koin)
+
+    implementation(libs.bundles.pagination)
+
 }
