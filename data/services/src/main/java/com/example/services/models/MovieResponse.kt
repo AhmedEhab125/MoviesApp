@@ -24,6 +24,4 @@ data class MovieResponse(
     val originalLanguage: String,
     @SerialName("original_title")
     val originalTitle: String,
-    @SerialName("genre_ids")
-    val genreIds: List<Int>
 ) 

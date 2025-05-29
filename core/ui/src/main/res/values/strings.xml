@@ -14,6 +14,7 @@
     <!-- Loading messages -->
     <string name="loading_movies">Loading movies…</string>
     <string name="loading_popular_movies">Loading popular movies…</string>
+    <string name="loading_movie_details">Loading movie details…</string>
     <string name="loading_searching_movies">Searching movies…</string>
 
     <!-- Empty state messages -->
@@ -47,6 +48,25 @@
     <!-- Movie details -->
     <string name="movie_rating_format">%.1f</string>
     <string name="movie_emoji">🎬</string>
+    <string name="movie_details_information">Movie Information</string>
+    <string name="movie_details_synopsis">Synopsis</string>
+    <string name="movie_details_rating">Rating</string>
+    <string name="movie_details_release_date">Release Date</string>
+    <string name="movie_details_quality">Quality</string>
+    <string name="movie_details_rating_format">%.1f/10</string>
+
+    <!-- Movie quality ratings -->
+    <string name="movie_quality_excellent">Excellent</string>
+    <string name="movie_quality_very_good">Very Good</string>
+    <string name="movie_quality_good">Good</string>
+    <string name="movie_quality_average">Average</string>
+    <string name="movie_quality_below_average">Below Average</string>
+
+    <!-- Content descriptions for movie details -->
+    <string name="cd_back_button">Back</string>
+    <string name="cd_movie_rating_chip">Movie rating chip</string>
+    <string name="cd_movie_release_date_chip">Movie release date chip</string>
+    <string name="cd_movie_quality_indicator">Movie quality indicator</string>
 
     <!-- Preview/Sample data -->
     <string name="sample_movie_title">The Avengers</string>

@@ -11,7 +11,6 @@ import com.example.ui.R
 import com.example.ui.components.loading.LoadingScreen
 import com.example.ui.components.states.ErrorScreen
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.onEach
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,11 +22,10 @@ fun AllMoviesScreen(
     modifier: Modifier = Modifier
 ) {
     LaunchedEffect(SideEffectsKey) {
-        effect.onEach {
+        effect.collect {
             when (it) {
-                is MoviesSideEffect.Navigation.NavigateToMovieDetails -> {
-                    onNavigationRequested(it)
-                }
+                is MoviesSideEffect.Navigation -> onNavigationRequested(it)
+
             }
         }
     }

@@ -56,7 +56,7 @@ fun AllMoviesContent(
                 PaginatedMoviesContent(
                     lazyPagingItems = lazyPagingItems,
                     viewMode = state.viewMode,
-                    onMovieClick = { /* TODO: Navigate to movie details */ },
+                    onMovieClick = onMovieClick,
                     onRetry = { onRefreshMovies() }
                 )
             }
