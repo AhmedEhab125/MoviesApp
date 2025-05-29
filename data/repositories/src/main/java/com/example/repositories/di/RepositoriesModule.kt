@@ -5,5 +5,5 @@ import com.example.repositories_interfaces.IMoviesRepository
 import org.koin.dsl.module
 
 val repositoriesModule = module {
-    single<IMoviesRepository> { MoviesRepositoryImpl(get()) }
+    single<IMoviesRepository> { MoviesRepositoryImpl(get(), get()) }
 } 

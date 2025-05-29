@@ -29,17 +29,18 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Project dependencies
-    implementation(project(Modules.DOMAIN_MODELS))
-    implementation(project(Modules.DOMAIN_REPOSITORIES_INTERFACES))
-    implementation(project(Modules.DATA_SERVICES))
-
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    implementation(libs.kotlinx.coroutines.core)
 
     // Paging 3
     implementation(libs.androidx.paging.runtime.ktx)
 
     // Koin for DI
     implementation(libs.bundles.koin)
+
+    // Project dependencies
+    implementation(project(Modules.DOMAIN_MODELS))
+    implementation(project(Modules.CORE_CASHING))
+    implementation(project(Modules.DOMAIN_REPOSITORIES_INTERFACES))
+    implementation(project(Modules.DATA_SERVICES))
 }
