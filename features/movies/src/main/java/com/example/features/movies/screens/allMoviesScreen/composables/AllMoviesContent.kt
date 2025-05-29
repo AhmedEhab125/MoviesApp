@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.features.movies.screens.allMoviesScreen.MoviesState
-import com.example.models.Movie
 import com.example.ui.R
 import com.example.ui.components.search.MovieSearchBar
 import com.example.ui.components.states.EmptyState
@@ -42,7 +41,7 @@ fun AllMoviesContent(
             modifier = Modifier.padding(bottom = Dimensions.dp_16dp)
         )
         when {
-            state.searchQuery.isNotEmpty() && state.searchPagingData != null -> {
+            state.searchPagingData != null -> {
                 val searchLazyPagingItems = state.searchPagingData.collectAsLazyPagingItems()
                 PaginatedMoviesContent(
                     lazyPagingItems = searchLazyPagingItems,
