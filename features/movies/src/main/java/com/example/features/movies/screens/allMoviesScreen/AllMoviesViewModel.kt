@@ -5,8 +5,8 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.example.base.BaseViewModel
 import com.example.ui.model.toUiModel
-import com.example.use_case.getPopularMoviesPagingUseCaseImpl.IGetPopularMoviesPagingUseCase
-import com.example.use_case.searchMoviesPagingUseCaseImpl.ISearchMoviesPagingUseCase
+import com.example.use_case.getPopularMoviesPagingUseCase.IGetPopularMoviesPagingUseCase
+import com.example.use_case.searchMoviesPagingUseCase.ISearchMoviesPagingUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.map

@@ -1,4 +1,4 @@
-package com.example.use_case.getMovieDetailsUseCaseImpl
+package com.example.use_case.getMovieDetailsUseCase
 
 import com.example.models.Movie
 import kotlinx.coroutines.flow.Flow

@@ -1,4 +1,4 @@
-package com.example.use_case.getMovieDetailsUseCaseImpl
+package com.example.use_case.getMovieDetailsUseCase
 
 import com.example.models.Movie
 import com.example.repositories_interfaces.IMoviesRepository

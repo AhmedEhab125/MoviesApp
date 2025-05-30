@@ -1,4 +1,4 @@
-package com.example.use_case.getPopularMoviesPagingUseCaseImpl
+package com.example.use_case.getPopularMoviesPagingUseCase
 
 import androidx.paging.PagingData
 import com.example.models.Movie

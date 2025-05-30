@@ -2,7 +2,7 @@ package com.example.features.movies.screens.movieDetailsScreen
 
 import com.example.base.BaseViewModel
 import com.example.ui.model.toUiModel
-import com.example.use_case.getMovieDetailsUseCaseImpl.IGetMovieDetailsUseCase
+import com.example.use_case.getMovieDetailsUseCase.IGetMovieDetailsUseCase
 
 class MovieDetailsViewModel(
     private val getMovieDetailsUseCase: IGetMovieDetailsUseCase
