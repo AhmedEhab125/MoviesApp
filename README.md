@@ -1,4 +1,4 @@
-# TriangleZ Movies App
+# Movies App
 
 A modern Android application built using Clean Architecture with MVI pattern to browse popular
 movies, view details, and search for movies using The Movie Database (TMDb) API.
