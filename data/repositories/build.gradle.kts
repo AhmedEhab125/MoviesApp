@@ -43,4 +43,11 @@ dependencies {
     implementation(project(Modules.CORE_CASHING))
     implementation(project(Modules.DOMAIN_REPOSITORIES_INTERFACES))
     implementation(project(Modules.DATA_SERVICES))
+
+    // Testing dependencies
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.paging.testing)
+    testImplementation(libs.turbine)
+    testImplementation(libs.mockk)
 }

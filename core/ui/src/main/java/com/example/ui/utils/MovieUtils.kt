@@ -33,7 +33,6 @@ object MovieUtils {
         return posterPath?.let { "${UiConstants.TMDB_IMAGE_BASE_URL_W780}$it" }
     }
 
-
     /**
      * Gets a safe movie title (fallback to "Unknown Movie" if empty)
      */
