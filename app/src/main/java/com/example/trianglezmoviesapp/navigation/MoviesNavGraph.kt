@@ -32,7 +32,7 @@ fun MoviesNavGraph(
             MovieDetailsRoute(
                 movieId = movieDetailsNavigation.movieId,
                 navigateBack = {
-                    navController.popBackStack()
+                    navController.navigateUp()
                 }
             )
         }

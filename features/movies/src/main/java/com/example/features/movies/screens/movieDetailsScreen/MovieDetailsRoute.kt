@@ -1,7 +1,6 @@
 package com.example.features.movies.screens.movieDetailsScreen
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -11,11 +10,8 @@ fun MovieDetailsRoute(
     viewModel: MovieDetailsViewModel = koinViewModel(),
     navigateBack: () -> Unit
 ) {
-    LaunchedEffect(movieId) {
-        viewModel.setEvent(MovieDetailsEvent.LoadMovieDetails(movieId))
-    }
-
     MovieDetailsScreen(
+        movieId = movieId,
         state = viewModel.viewState.collectAsStateWithLifecycle().value,
         onEvent = viewModel::setEvent,
         effect = viewModel.effect,

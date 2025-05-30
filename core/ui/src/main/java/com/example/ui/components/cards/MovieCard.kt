@@ -37,9 +37,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.ui.R
 import com.example.ui.components.images.NetworkImage
 import com.example.ui.constants.AspectRatios
-import com.example.ui.constants.UiConstants
 import com.example.ui.dimentions.Dimensions
 import com.example.ui.model.MovieUiModel
+import com.example.ui.utils.MovieUtils
 
 @Composable
 fun MovieCard(
@@ -96,13 +96,13 @@ private fun MoviePosterImage(
     modifier: Modifier = Modifier
 ) {
     NetworkImage(
-        imageUrl = if (posterPath != null) "${UiConstants.TMDB_IMAGE_BASE_URL}${posterPath}" else null,
+        imageUrl = if (posterPath != null) MovieUtils.getFullPosterUrl(posterPath) else null,
         contentDescription = title,
         modifier = modifier
             .fillMaxWidth()
             .aspectRatio(AspectRatios.RATIO_4_3)
             .clip(RoundedCornerShape(topStart = Dimensions.dp_16dp, topEnd = Dimensions.dp_16dp)),
-        contentScale = ContentScale.Crop,
+        contentScale = ContentScale.FillBounds,
         shape = RoundedCornerShape(topStart = Dimensions.dp_16dp, topEnd = Dimensions.dp_16dp)
     )
 }
