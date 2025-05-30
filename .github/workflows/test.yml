@@ -1,4 +1,4 @@
-name: Build
+name: Test
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  build:
-    name: Build APK
+  test:
+    name: Run Tests and Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -37,26 +37,18 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build debug APK
-        run: ./gradlew assembleDebug --parallel
+      - name: Run tests
+        run: ./gradlew test --parallel --continue
 
-      - name: Upload build artifacts
+      - name: Run lint
+        run: ./gradlew lint --parallel
+
+      - name: Upload test and lint reports
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts-${{ github.sha }}
+          name: test-and-lint-reports-${{ github.sha }}
           path: |
-            app/build/outputs/apk/debug/
+            **/build/reports/lint-results*.html
+            **/build/test-results/
           retention-days: 7
-
-      - name: Comment PR with build info
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '✅ Build completed successfully! APK is ready for download in the artifacts section.'
-            })
