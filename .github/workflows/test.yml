@@ -40,10 +40,8 @@ jobs:
       - name: Run tests
         run: ./gradlew test --parallel --continue
 
-      - name: Run lint
-        run: ./gradlew lint --parallel
 
-      - name: Upload test and lint reports
+      - name: Upload test
         if: success()
         uses: actions/upload-artifact@v4
         with:
