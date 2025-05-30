@@ -45,7 +45,7 @@ fun MovieDetailsScreen(
         is MovieDetailsState.Error -> {
             ErrorScreen(
                 error = state.message,
-                onRetry = { /* Will be handled by navigation */ }
+                onRetry = { onEvent(MovieDetailsEvent.LoadMovieDetails(movieId)) },
             )
         }
 

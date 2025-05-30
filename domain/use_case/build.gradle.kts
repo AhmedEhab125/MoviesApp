@@ -45,11 +45,18 @@ dependencies {
     implementation(project(Modules.DOMAIN_REPOSITORIES_INTERFACES))
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    implementation(libs.kotlinx.coroutines.core)
 
     // Paging 3
     implementation(libs.androidx.paging.runtime.ktx)
 
     // Koin for DI
     implementation(libs.bundles.koin)
+
+    // Testing dependencies
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.paging.testing)
+    testImplementation(libs.turbine)
+    testImplementation(libs.mockk)
 }
