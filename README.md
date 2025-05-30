@@ -2,6 +2,17 @@
 
 A modern Android application built using Clean Architecture with MVI pattern to browse popular
 movies, view details, and search for movies using The Movie Database (TMDb) API.
+## 📱 Demo
+
+https://github.com/user-attachments/assets/1c9177f1-01e0-4ca5-95c9-62be29336208
+
+**Demo Video Show:**
+- 🎬 Browse popular movies in grid/list view
+- 🔍 Real-time search functionality  
+- 📱 Movie details with beautiful UI
+- 🔄 Pull-to-refresh and pagination
+- 🌓 Dark/Light theme switching
+- ⚡ Smooth animations and loading states
 
 ## 🏗️ Architecture
 
