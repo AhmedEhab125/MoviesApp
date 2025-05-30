@@ -11,6 +11,13 @@ import java.io.IOException
 }
 
 /**
+ * Exception represents no network connectivity
+ */
+object NoNetworkException : IOException("No Network Connection Available") {
+    private fun readResolve(): Any = NoNetworkException
+}
+
+/**
  * Exception represents Http Exception with error body of [ErrorBodyResponse]
  */
 open class GeneralHttpException(

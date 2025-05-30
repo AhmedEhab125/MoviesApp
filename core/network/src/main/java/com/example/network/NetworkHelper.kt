@@ -9,6 +9,8 @@ class NetworkHelper {
     suspend inline fun <reified T> processCall(networkCall: () -> HttpResponse): T? {
         val response = try {
             networkCall.invoke()
+        } catch (throwable: NoNetworkException) {
+            throw NoNetworkException
         } catch (throwable: IOException) {
             throw NetworkException
         } catch (throwable: Throwable) {

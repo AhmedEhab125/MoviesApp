@@ -2,6 +2,8 @@ package com.example.network.networkClient
 
 import com.example.network.BuildConfig
 import com.example.network.NetworkConstants
+import com.example.network.connectivity.INetworkConnectivityChecker
+import com.example.network.interceptor.NetworkConnectivityInterceptor
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -13,8 +15,15 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-internal fun provideOkHttpClient(): HttpClient {
+internal fun provideOkHttpClient(
+    networkConnectivityChecker: INetworkConnectivityChecker
+): HttpClient {
     return HttpClient(OkHttp) {
+        // Install Network Connectivity Interceptor
+        install(NetworkConnectivityInterceptor) {
+            networkChecker(networkConnectivityChecker)
+        }
+
         // Install Content Negotiation
         install(ContentNegotiation) {
             json(Json {
@@ -25,7 +34,6 @@ internal fun provideOkHttpClient(): HttpClient {
                 allowStructuredMapKeys = true
             })
         }
-
 
         // Default request configuration
         defaultRequest {
