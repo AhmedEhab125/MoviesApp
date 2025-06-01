@@ -22,6 +22,7 @@ fun ColumnMoviesContent(
     onMovieClick: (MovieUiModel) -> Unit
 ) {
     LazyColumn(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(Dimensions.dp_16dp)
     ) {
         items(

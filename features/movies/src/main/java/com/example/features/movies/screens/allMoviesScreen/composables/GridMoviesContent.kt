@@ -22,6 +22,7 @@ fun GridMoviesContent(
     onMovieClick: (MovieUiModel) -> Unit,
 ) {
     LazyVerticalGrid(
+        modifier = modifier,
         columns = GridCells.Fixed(NUMBER_OF_COLUMNS),
         verticalArrangement = Arrangement.spacedBy(Dimensions.dp_16dp),
         horizontalArrangement = Arrangement.spacedBy(Dimensions.dp_16dp)

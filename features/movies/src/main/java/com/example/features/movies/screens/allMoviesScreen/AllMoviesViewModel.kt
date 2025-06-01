@@ -12,6 +12,20 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for the All Movies screen that handles both popular movies display and search functionality.
+ * Extends [BaseViewModel] to implement MVI pattern with state management.
+ *
+ * Features:
+ * - Displays popular movies with pagination
+ * - Implements search functionality with debouncing
+ * - Supports list/grid view modes
+ * - Handles loading, error, and empty states
+ * - Manages navigation to movie details
+ *
+ * @property getPopularMoviesPagingUseCase Use case for fetching popular movies
+ * @property searchMoviesPagingUseCase Use case for searching movies
+ */
 class AllMoviesViewModel(
     private val getPopularMoviesPagingUseCase: IGetPopularMoviesPagingUseCase,
     private val searchMoviesPagingUseCase: ISearchMoviesPagingUseCase
@@ -21,6 +35,11 @@ class AllMoviesViewModel(
 
     override fun setInitialState(): MoviesState = MoviesState.Idle
 
+    /**
+     * Handles all UI events and updates state accordingly.
+     *
+     * @param event The UI event to handle
+     */
     override fun handleEvents(event: MoviesEvent) {
         when (event) {
             is MoviesEvent.LoadPopularMovies -> loadPopularMovies()
@@ -30,10 +49,13 @@ class AllMoviesViewModel(
             is MoviesEvent.ClearSearch -> clearSearch()
             is MoviesEvent.ToggleViewMode -> toggleViewMode()
             is MoviesEvent.NavigateTo -> setEffect { event.navigation }
-
         }
     }
 
+    /**
+     * Loads popular movies with pagination support.
+     * Updates state with paginated data flow.
+     */
     private fun loadPopularMovies() {
         val moviesPagingData =
             getPopularMoviesPagingUseCase()
@@ -51,6 +73,10 @@ class AllMoviesViewModel(
         }
     }
 
+    /**
+     * Refreshes the current movie list.
+     * If in search mode, refreshes search results; otherwise refreshes popular movies.
+     */
     private fun refreshMovies() {
         val currentState = getState()
         if (currentState is MoviesState.DataLoaded && currentState.searchQuery.isNotEmpty()) {
@@ -60,6 +86,12 @@ class AllMoviesViewModel(
         }
     }
 
+    /**
+     * Updates the search query with debouncing.
+     * Initiates search after a delay to prevent excessive API calls.
+     *
+     * @param query The search query string
+     */
     private fun updateSearchQuery(query: String) {
         val currentState = getState()
         if (currentState is MoviesState.DataLoaded) {
@@ -78,6 +110,12 @@ class AllMoviesViewModel(
         }
     }
 
+    /**
+     * Performs movie search with the given query.
+     * Updates state with search results.
+     *
+     * @param query The search query string
+     */
     private fun searchMovies(query: String) {
         if (query.isBlank()) {
             clearSearch()
@@ -96,9 +134,11 @@ class AllMoviesViewModel(
                 isSearching = false
             )
         }
-
     }
 
+    /**
+     * Clears the search state and returns to popular movies display.
+     */
     private fun clearSearch() {
         searchJob?.cancel()
         setState {
@@ -111,6 +151,9 @@ class AllMoviesViewModel(
         loadPopularMovies()
     }
 
+    /**
+     * Toggles between list and grid view modes.
+     */
     private fun toggleViewMode() {
         val currentState = getState()
         if (currentState is MoviesState.DataLoaded) {

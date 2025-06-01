@@ -29,7 +29,7 @@ fun AllMoviesHeader(
     onChangeModeClicked: () -> Unit
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(bottom = Dimensions.dp_16dp),
         horizontalArrangement = Arrangement.SpaceBetween,
